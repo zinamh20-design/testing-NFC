@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>GAMORA CARDS | Games — NFC Smart Interactive Collection</title>
+  <!-- Google Fonts + Font Awesome 6 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --gradient-primary: linear-gradient(135deg, #ff2d75, #ff8c42);
+      --gradient-hover: linear-gradient(135deg, #ff4d8b, #ffa15e);
+    }
+
+    .global-nav {
+      background: #000000dd;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 45, 117, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 1rem 0;
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: 0.2s;
+      padding: 0.4rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active-page {
+      border-bottom-color: #ff8c42;
+      background: linear-gradient(135deg, #ff2d75, #ff8c42);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: var(--gradient-primary);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .section-sub {
+      color: #cccccc;
+      max-width: 700px;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .games-category {
+      margin-bottom: 3rem;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid rgba(255, 140, 66, 0.3);
+    }
+
+    .category-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .free-badge {
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .premium-badge {
+      background: var(--gradient-primary);
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .game-card {
+      background: #0a0a0a;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid #222;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .game-card:hover {
+      transform: translateY(-6px);
+      border-color: #ff8c42;
+      box-shadow: 0 10px 30px rgba(255, 45, 117, 0.2);
+    }
+
+    .game-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .game-content {
+      padding: 1.5rem;
+    }
+
+    .game-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .game-card p {
+      color: #aaa;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .game-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #222;
+    }
+
+    .play-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #333;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+      color: white;
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .play-btn:hover {
+      background: var(--gradient-primary);
+      border-color: transparent;
+    }
+
+    .free-btn:hover {
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+    }
+
+    .game-tag {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+      z-index: 10;
+    }
+
+    .free-tag {
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+    }
+
+    .premium-tag {
+      background: var(--gradient-primary);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+      border-top: 1px solid #1f1f1f;
+      color: #aaa;
+    }
+
+    /* ----- GAME OVERLAY (shared) ----- */
+    .game-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .game-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .game-modal {
+      background: #0a0a0a;
+      border-radius: 40px;
+      max-width: 580px;
+      width: 100%;
+      padding: 2rem 2.2rem;
+      border: 1px solid #ff8c42;
+      box-shadow: 0 20px 60px rgba(255, 45, 117, 0.3);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .game-modal h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      background: var(--gradient-primary);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .game-modal p.sub {
+      color: #aaa;
+      margin-bottom: 1.8rem;
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .form-group input, 
+    .form-group select {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border-radius: 30px;
+      background: #1e1e1e;
+      border: 1px solid #333;
+      color: white;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #ff8c42;
+      outline: none;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .modal-actions button {
+      flex: 1;
+      padding: 0.8rem 0;
+      border-radius: 60px;
+      font-weight: 700;
+      background: #222;
+      border: 1px solid #444;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      min-width: 100px;
+    }
+
+    .modal-actions .primary-btn {
+      background: var(--gradient-primary);
+      border: none;
+    }
+
+    .modal-actions .primary-btn:hover {
+      transform: scale(1.01);
+      filter: brightness(1.1);
+    }
+
+    .modal-actions .secondary-btn {
+      background: transparent;
+      border: 1px solid #555;
+    }
+
+    .modal-actions .secondary-btn:hover {
+      border-color: #ff8c42;
+    }
+
+    /* ----- FULL SCREEN REVEAL (bigger window) ----- */
+    .reveal-fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 2rem;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .reveal-fullscreen.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .reveal-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 800px;
+      width: 100%;
+      gap: 2rem;
+    }
+
+    .reveal-content img {
+      max-width: 90%;
+      max-height: 65vh;
+      object-fit: contain;
+      border-radius: 20px;
+      border: 2px solid #333;
+      box-shadow: 0 20px 60px rgba(255, 45, 117, 0.2);
+    }
+
+    .reveal-content .player-label {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .reveal-content .role-label {
+      font-size: 1.5rem;
+      font-weight: 600;
+      padding: 0.5rem 2rem;
+      border-radius: 60px;
+    }
+
+    .reveal-content .role-officer {
+      background: #0044ff22;
+      border: 2px solid #0044ff;
+      color: #0044ff;
+    }
+
+    .reveal-content .role-doctor {
+      background: #00ff8822;
+      border: 2px solid #00ff88;
+      color: #00ff88;
+    }
+
+    .reveal-content .role-mafia {
+      background: #ff2d7522;
+      border: 2px solid #ff2d75;
+      color: #ff2d75;
+    }
+
+    .reveal-content .role-citizen {
+      background: #88888822;
+      border: 2px solid #888888;
+      color: #aaaaaa;
+    }
+
+    .reveal-content .role-imposter {
+      background: #ff2d7522;
+      border: 2px solid #ff2d75;
+      color: #ff2d75;
+    }
+
+    .reveal-content .role-song {
+      background: #8b5cf622;
+      border: 2px solid #8b5cf6;
+      color: #a78bfa;
+    }
+
+    .reveal-content .next-btn-big {
+      padding: 1rem 3rem;
+      border-radius: 60px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      min-width: 200px;
+    }
+
+    .reveal-content .next-btn-big:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+    }
+
+    .reveal-content .next-btn-big:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .reveal-content .progress-text {
+      color: #888;
+      font-size: 1rem;
+    }
+
+    .reveal-content .done-btn {
+      padding: 1rem 3rem;
+      border-radius: 60px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      background: #00b4d8;
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      min-width: 200px;
+    }
+
+    .reveal-content .done-btn:hover {
+      transform: scale(1.05);
+      background: #0090b0;
+    }
+
+    @media (max-width: 780px) {
+      .section-title { font-size: 2rem; }
+      .container { padding: 1.5rem; }
+      .games-grid { grid-template-columns: 1fr; }
+      .game-modal { padding: 1.5rem; }
+      .reveal-content .player-label { font-size: 1.5rem; }
+      .reveal-content .role-label { font-size: 1.2rem; }
+      .reveal-content img { max-height: 50vh; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="global-nav">
+  <div class="nav-container">
+    <div class="logo">
+      <a href="index.html">⚡ GAMORA<span class="gradient-text">CARDS</span></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" data-page="home">Home</a></li>
+      <li><a href="order.html" data-page="order">Order Now</a></li>
+      <li><a href="subscription.html" data-page="subscription">Subscription</a></li>
+      <li><a href="games.html" data-page="games" class="active-page">Games</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <h1 class="section-title"><i class="fas fa-gamepad"></i> Our Games</h1>
+    <p class="section-sub">Discover our collection of NFC-enabled physical games. Tap your physical deck to unlock individual game modes instantly on your phone.</p>
+
+    <!-- FREE GAMES SECTION -->
+    <div class="games-category">
+      <div class="category-header">
+        <h2><i class="fas fa-gift"></i> Free Games</h2>
+        <span class="free-badge"><i class="fas fa-bolt"></i> Tap to Play</span>
+      </div>
+      <div class="games-grid">
+        <!-- Free Game 1 - NFC MAFIA -->
+        <div class="game-card" id="mafiaGameCard">
+          <div class="game-tag free-tag">FREE</div>
+          <img src="./images/3ec3224a-96f2-49ea-8d70-7451ef738bf7.jpg" alt="NFC Mafia" class="game-image">
+          <div class="game-content">
+            <h3>NFC Mafia</h3>
+            <p>Tap your character card to the phone to secretly receive your role (Mafia, Doctor, or Detective). No narrator needed!</p>
+            <div class="game-meta">
+              <button class="play-btn free-btn" id="launchMafiaBtn"><i class="fas fa-play"></i> Play Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Free Game 2 - IMPOSTER -->
+        <div class="game-card" id="imposterGameCard">
+          <div class="game-tag free-tag">FREE</div>
+          <img src="./images/imposter.jpg" alt="Imposter" class="game-image">
+          <div class="game-content">
+            <h3>Imposter</h3>
+            <p>A multiplayer social deduction game. Tap to scan cards, complete tasks on screen, and find the hidden traitor in the room.</p>
+            <div class="game-meta">
+              <button class="play-btn free-btn" id="launchImposterBtn"><i class="fas fa-play"></i> Play Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Free Game 3 - MOVIES -->
+        <div class="game-card">
+          <div class="game-tag free-tag">FREE</div>
+          <img src="./images/WhatsApp Image 2026-06-18 at 4.03.43 PM.jpeg" alt="Movies" class="game-image">
+          <div class="game-content">
+            <h3>Movies</h3>
+            <p>The ultimate movie trivia game. Tap movie cards to reveal dynamic trailers, hidden clues, and interactive digital quizzes.</p>
+            <div class="game-meta">
+              <button class="play-btn free-btn" onclick="alert('Launching Movies Demo — Tap a movie card!')"><i class="fas fa-play"></i> Play Demo</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Free Game 4 - SONGS & BEATS (CLASSICS ONLY) -->
+        <div class="game-card" id="songsGameCard">
+          <div class="game-tag free-tag">FREE</div>
+          <img src="./images/songs.jpeg" alt="Songs & Beats" class="game-image">
+          <div class="game-content">
+            <h3>Songs & Beats</h3>
+            <p>Guess the tune! Tap your music deck to reveal a unique classic song for each player. Can you name them all?</p>
+            <div class="game-meta">
+              <button class="play-btn free-btn" id="launchSongsBtn"><i class="fas fa-play"></i> Play Now</button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- PREMIUM GAMES SECTION -->
+    <div class="games-category">
+      <div class="category-header">
+        <h2><i class="fas fa-crown"></i> Premium Games</h2>
+        <span class="premium-badge"><i class="fas fa-lock"></i> Requires Deck Purchase</span>
+      </div>
+      <div class="games-grid">
+        <!-- Premium Game 1 -->
+        <div class="game-card">
+          <div class="game-tag premium-tag">PREMIUM</div>
+          <img src="./images/who.jpeg" alt="Who's Next" class="game-image">
+          <div class="game-content">
+            <h3>Who's Next</h3>
+            <p>An interactive party game. Tap physical cards to randomly trigger hilarious digital challenges, dares, and group voting.</p>
+            <div class="game-meta">
+              <button class="play-btn" onclick="alert('Unlock with your Smart Deck — Visit Order Now page to buy!')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Game 2 -->
+        <div class="game-card">
+          <div class="game-tag premium-tag">PREMIUM</div>
+          <img src="./images/STORY.jpeg" alt="Story Time" class="game-image">
+          <div class="game-content">
+            <h3>Story Time</h3>
+            <p>An interactive storytelling RPG. Tap item and choice cards to build branching text adventures and battle digital monsters.</p>
+            <div class="game-meta">
+              <button class="play-btn" onclick="alert('Unlock Story Time — Visit Order Now page to buy!')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Game 3 -->
+        <div class="game-card">
+          <div class="game-tag premium-tag">PREMIUM</div>
+          <img src="./images/case.jpeg" alt="The Case" class="game-image">
+          <div class="game-content">
+            <h3>The Case</h3>
+            <p>Become a detective. Scan physical evidence cards, cross-examine suspects on screen, and crack complex murder mysteries.</p>
+            <div class="game-meta">
+              <button class="play-btn" onclick="alert('Unlock The Case — Visit Order Now page to buy!')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Game 4 -->
+        <div class="game-card">
+          <div class="game-tag premium-tag">PREMIUM</div>
+          <img src="./images/m.jpeg" alt="Multiverse Reel" class="game-image">
+          <div class="game-content">
+            <h3>Multiverse Reel</h3>
+            <p>A fast-action strategy game. Tap your dynamic deck onto the screen to unleash magical combinations on a live scoreboard.</p>
+            <div class="game-meta">
+              <button class="play-btn" onclick="alert('Unlock Multiverse Reel — Visit Order Now page to buy!')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+          </div>
+        </div>
+
+         <!-- Premium Game 5 -->
+        <div class="game-card">
+          <div class="game-tag premium-tag">PREMIUM</div>
+          <img src="./images/treat.jpeg" alt="Treasure Hunt" class="game-image">
+          <div class="game-content">
+            <h3>Treasure Hunt</h3>
+            <p>Hide physical cards around the room. Players must find and tap them with their phones to solve digital riddles!</p>
+            <div class="game-meta">
+              <button class="play-btn" onclick="alert('Unlock Treasure Hunt Premium Expansion — Visit Order Now page to buy!')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- SONGS & BEATS SETUP OVERLAY (CLASSICS ONLY) -->
+<div class="game-overlay" id="songsOverlay">
+  <div class="game-modal" id="songsModal">
+    <h2><i class="fas fa-music"></i> Songs & Beats Setup</h2>
+    <p class="sub">Set the number of players. Each player will receive a unique classic song card.</p>
+    
+    <div class="form-group">
+      <label><i class="fas fa-users"></i> Number of players</label>
+      <input type="number" id="songsPlayerCount" min="2" max="12" value="4">
+    </div>
+
+    <div class="form-group">
+      <label><i class="fas fa-tag"></i> Genre</label>
+      <input type="text" id="songsGenreDisplay" value="🎻 Classic" disabled style="opacity:0.7; cursor:not-allowed;">
+    </div>
+
+    <div class="modal-actions">
+      <button class="primary-btn" id="startSongsGame"><i class="fas fa-dice"></i> Start Game</button>
+      <button class="secondary-btn" id="closeSongsOverlay">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- NFC MAFIA SETUP OVERLAY -->
+<div class="game-overlay" id="mafiaOverlay">
+  <div class="game-modal" id="mafiaModal">
+    <h2><i class="fas fa-user-secret"></i> NFC Mafia Setup</h2>
+    <p class="sub">Set the number of players. Roles will be randomly assigned: 1 Officer, 1 Doctor, 1 Mafia, rest are Citizens.</p>
+    
+    <div class="form-group">
+      <label><i class="fas fa-users"></i> Number of players</label>
+      <input type="number" id="mafiaPlayerCount" min="4" max="12" value="6">
+    </div>
+
+    <div class="modal-actions">
+      <button class="primary-btn" id="startMafiaGame"><i class="fas fa-dice"></i> Start Game</button>
+      <button class="secondary-btn" id="closeMafiaOverlay">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPOSTER SETUP OVERLAY -->
+<div class="game-overlay" id="imposterOverlay">
+  <div class="game-modal" id="imposterModal">
+    <h2><i class="fas fa-user-secret"></i> Imposter Setup</h2>
+    <p class="sub">Set players, imposters &amp; category. Roles will be revealed one by one.</p>
+    
+    <div class="form-group">
+      <label><i class="fas fa-users"></i> Number of players</label>
+      <input type="number" id="playerCount" min="3" max="12" value="6">
+    </div>
+    <div class="form-group">
+      <label><i class="fas fa-skull"></i> How many imposters?</label>
+      <input type="number" id="imposterCount" min="1" max="3" value="1">
+    </div>
+    <div class="form-group">
+      <label><i class="fas fa-tag"></i> Category</label>
+      <select id="categorySelect">
+        <option value="food">🍕 Food</option>
+        <option value="animals">🐾 Animals</option>
+        <option value="random">🎲 Random Items</option>
+        <option value="places">🌍 Places</option>
+      </select>
+    </div>
+
+    <div class="modal-actions">
+      <button class="primary-btn" id="startImposterGame"><i class="fas fa-dice"></i> Start Game</button>
+      <button class="secondary-btn" id="closeImposterOverlay">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- FULL SCREEN REVEAL -->
+<div class="reveal-fullscreen" id="revealFullscreen">
+  <div class="reveal-content" id="revealContent">
+    <div class="progress-text" id="progressText">Player 1 of 6</div>
+    <img id="revealImage" src="" alt="Player role">
+    <div class="player-label" id="playerLabel">Player 1</div>
+    <div class="role-label" id="roleLabel">👤 CREW</div>
+    <button class="next-btn-big" id="nextBtn">Next →</button>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 GAMORA CAR─ Smart NFC Gaming. Secure checkout.</p>
+  <p style="margin-top: 0.5rem;"><i class="fas fa-dice-d20"></i> Shipping across Arab countries • Cash on delivery available</p>
+</footer>
+
+<script>
+  // ============================================
+  // 🔽 CLASSIC SONGS (10 images) 🔽
+  // ============================================
+  const SONG_LINKS = {
+    classic: [
+      'https://cdn.phototourl.com/free/2026-07-02-f981a311-6fc0-4d62-8b4b-d33d491ada32.png',
+      'https://cdn.phototourl.com/free/2026-07-02-be1b327a-6de1-44ba-a23d-a7847d3192d8.png',
+      'https://cdn.phototourl.com/free/2026-07-02-5699662b-32f2-4551-9054-ab5973fbfe25.png',
+      'https://cdn.phototourl.com/free/2026-07-02-bdf9d641-58d4-45c9-b9e9-6aab2a85d875.png',
+      'https://cdn.phototourl.com/free/2026-07-02-ca9a3339-124b-4469-a01d-e365fc139a03.png',
+      'https://cdn.phototourl.com/free/2026-07-02-e6407dd1-43d0-4ff6-80d9-75c3a9473047.png',
+      'https://cdn.phototourl.com/free/2026-07-02-92f5206a-0df8-422c-b876-1241f2138fae.png',
+      'https://cdn.phototourl.com/free/2026-07-02-0507fe9d-b479-4ca2-ad32-236102735ae1.png',
+      'https://cdn.phototourl.com/free/2026-07-02-5296c9ae-0cc5-4547-a72a-49aaf92528c1.png',
+      'https://cdn.phototourl.com/member/2026-07-02-ac79b426-ab41-4875-8f37-7541d3e7084d.png',
+      'https://cdn.phototourl.com/member/2026-07-02-6f70665f-8998-4ea0-9193-c95efaec0585.png'
+    ]
+  };
+
+  // ============================================
+  // 🔽 MAFIA CARD LINKS 🔽
+  // ============================================
+  const MAFIA_LINKS = {
+    officer: 'https://img.sanishtech.com/u/5eff9854b10acd8f4d4298fd05b9e11d.png',
+    doctor: 'https://img.sanishtech.com/u/f35ed463e6f2d6b7b59e7d7a511339e3.png',
+    mafia: 'https://img.sanishtech.com/u/8a18201b1c23aaa1c05d2825435aed56.png',
+    citizen: 'https://img.sanishtech.com/u/816be22b7eeee6d477e25f4f5a148795.png'
+  };
+
+  // ============================================
+  // 🔽 IMPOSTER IMAGE LINKS 🔽
+  // ============================================
+  const IMPOSTER_LINKS = {
+    food: [
+      'https://img.sanishtech.com/u/5eff9854b10acd8f4d4298fd05b9e11d.png',
+      'https://img.sanishtech.com/u/f35ed463e6f2d6b7b59e7d7a511339e3.png',
+      'https://img.sanishtech.com/u/8a18201b1c23aaa1c05d2825435aed56.png',
+      'https://img.sanishtech.com/u/816be22b7eeee6d477e25f4f5a148795.png',
+      'https://img.sanishtech.com/u/be092c8a195a2a6b7e62039c6a084bc1.png',
+      'https://img.sanishtech.com/u/8a42db2eb7f63fcb7ad01df549a6f17a.png',
+      'https://img.sanishtech.com/u/a832b5f5e6e07c090a44dc0051faa0e1.png',
+      'https://img.sanishtech.com/u/260b0ba36dfedecc42c48cf6768ae863.png',
+      'https://img.sanishtech.com/u/1733eaf64ca03098beda481068a688e2.png',
+      'https://img.sanishtech.com/u/e2e9ddf4250ab19399da279f0e532eeb.png'
+    ],
+    animals: [
+      'https://img.sanishtech.com/u/5af569c62dc42617752be9569db8ccbf.png',
+      'https://img.sanishtech.com/u/bff8f4dcade880e80cd6114e73c815c5.png',
+      'https://img.sanishtech.com/u/e1995475d2c0013039d379169b875d26.png',
+      'https://img.sanishtech.com/u/9c77e9059161577c109f3ca6138cf831.png',
+      'https://img.sanishtech.com/u/04cf006329e3f84498a72fd7e7592787.png',
+      'https://img.sanishtech.com/u/6a5f35d1b3e6dedc8344570f1075e887.png',
+      'https://img.sanishtech.com/u/4d1cbb0423d4b15e5600c50174e56918.png',
+      'https://img.sanishtech.com/u/cad7436538114ecd9c0c816cfd958f9a.png',
+      'https://img.sanishtech.com/u/ce14bc53e97315ad770e25216d1cab92.png',
+      'https://img.sanishtech.com/u/89f2fb6bd92a12eaecb3dc4598d8d20e.png'
+    ],
+    random: [
+      'https://www.image2url.com/r2/default/images/1782998591145-b8041f2d-3225-411d-a425-be6c12688b85.png',
+      'https://www.image2url.com/r2/default/images/1782998632866-f31b4a00-4bab-43ad-b6a9-8277fdf0f109.png',
+      'https://www.image2url.com/r2/default/images/1782998679965-8b69899b-944d-4807-adcd-44302328a887.png',
+      'https://www.image2url.com/r2/default/images/1782998804318-a6e6f6c0-fdde-4567-acc4-e1876396cc91.png',
+      'https://www.image2url.com/r2/default/images/1782998965721-2d5ce8bb-17a3-443f-9570-e16b7f47d77a.png',
+      'https://www.image2url.com/r2/default/images/1782999067695-f527ec24-1fc5-43ec-a961-a268a15ca846.png',
+      'https://www.image2url.com/r2/default/images/1782999158509-78591759-4f0d-488c-9897-b677c6657b70.png',
+      'https://img.sanishtech.com/u/54e9beff0916e010afe84b79625b3f91.png',
+      'https://img.sanishtech.com/u/d84df8376104dae2dae22e89afb20fcd.png',
+      'https://img.sanishtech.com/u/d3c2f6f855ac6566df45a4befc0a2c0e.png'
+    ],
+    places: [
+      'https://cdn.phototourl.com/member/2026-07-02-aa307f4c-b02a-42f3-9263-c46c0495e9cd.png',
+      'https://cdn.phototourl.com/member/2026-07-02-3cce55aa-718f-4410-848a-6299b2b0f98c.png',
+      'https://cdn.phototourl.com/member/2026-07-02-c781e852-adeb-4ea8-8d6a-9c0b6786004a.png',
+      'https://cdn.phototourl.com/member/2026-07-02-59638e20-b0da-42f8-85d1-c1046abc4aed.png',
+      'https://cdn.phototourl.com/member/2026-07-02-1135bd87-d9f8-408c-9dcb-1860d4828849.png',
+      'https://cdn.phototourl.com/member/2026-07-02-a19f973a-08f4-4ff2-9604-6a847801b719.png',
+      'https://cdn.phototourl.com/member/2026-07-02-7451a495-e131-4835-a24f-baac8ea502c2.png',
+      'https://cdn.phototourl.com/member/2026-07-02-e048b3ed-2ece-48eb-b316-4d1a53c161e2.png',
+      'https://www.image2url.com/r2/default/images/1782998480868-b515db89-3641-458f-b9a6-8f645bf4e7b2.png',
+      'https://www.image2url.com/r2/default/images/1782998517761-83f0ce65-844d-4c88-a6db-e63bba7f24af.png'
+    ],
+    imposter: 'https://img.sanishtech.com/u/ffa12d7c58c8a48d9c30a5556c9271b2.png'
+  };
+
+  (function() {
+    // ----- DOM refs for Songs -----
+    const songsOverlay = document.getElementById('songsOverlay');
+    const launchSongsBtn = document.getElementById('launchSongsBtn');
+    const closeSongsOverlayBtn = document.getElementById('closeSongsOverlay');
+    const startSongsBtn = document.getElementById('startSongsGame');
+    const songsPlayerCount = document.getElementById('songsPlayerCount');
+
+    // ----- DOM refs for Mafia -----
+    const mafiaOverlay = document.getElementById('mafiaOverlay');
+    const launchMafiaBtn = document.getElementById('launchMafiaBtn');
+    const closeMafiaOverlayBtn = document.getElementById('closeMafiaOverlay');
+    const startMafiaBtn = document.getElementById('startMafiaGame');
+    const mafiaPlayerCount = document.getElementById('mafiaPlayerCount');
+
+    // ----- DOM refs for Imposter -----
+    const imposterOverlay = document.getElementById('imposterOverlay');
+    const launchImposterBtn = document.getElementById('launchImposterBtn');
+    const closeImposterOverlayBtn = document.getElementById('closeImposterOverlay');
+    const startImposterBtn = document.getElementById('startImposterGame');
+    const playerCountInput = document.getElementById('playerCount');
+    const imposterCountInput = document.getElementById('imposterCount');
+    const categorySelect = document.getElementById('categorySelect');
+
+    // ----- Fullscreen reveal elements (shared) -----
+    const revealFullscreen = document.getElementById('revealFullscreen');
+    const revealImage = document.getElementById('revealImage');
+    const playerLabel = document.getElementById('playerLabel');
+    const roleLabel = document.getElementById('roleLabel');
+    const progressText = document.getElementById('progressText');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // Game state
+    let gameData = null;
+    let currentPlayerIndex = 0;
+    let currentGameType = null;
+
+    // ----- Shared functions -----
+    function closeAllOverlays() {
+      songsOverlay.classList.remove('active');
+      mafiaOverlay.classList.remove('active');
+      imposterOverlay.classList.remove('active');
+      revealFullscreen.classList.remove('active');
+      gameData = null;
+      currentPlayerIndex = 0;
+      currentGameType = null;
+    }
+
+    function showPlayerFullscreen(index) {
+      if (!gameData) return;
+      const player = gameData.players[index];
+      if (!player) return;
+
+      const total = gameData.totalPlayers;
+      const isLast = index === total - 1;
+
+      revealImage.src = player.image;
+      revealImage.alt = `Player ${index + 1}`;
+      playerLabel.textContent = `Player ${index + 1}`;
+      
+      let roleDisplay = '';
+      let roleClass = 'role-citizen';
+      
+      if (gameData.gameType === 'songs') {
+        roleDisplay = `🎵 ${player.songTitle || 'Classic Track'}`;
+        roleClass = 'role-song';
+      } else if (gameData.gameType === 'mafia') {
+        if (player.role === 'officer') {
+          roleDisplay = '👮 OFFICER';
+          roleClass = 'role-officer';
+        } else if (player.role === 'doctor') {
+          roleDisplay = '🩺 DOCTOR';
+          roleClass = 'role-doctor';
+        } else if (player.role === 'mafia') {
+          roleDisplay = '🔫 MAFIA';
+          roleClass = 'role-mafia';
+        } else {
+          roleDisplay = '👤 CITIZEN';
+          roleClass = 'role-citizen';
+        }
+      } else if (gameData.gameType === 'imposter') {
+        if (player.role === 'imposter') {
+          roleDisplay = '🕵️ IMPOSTER';
+          roleClass = 'role-imposter';
+        } else {
+          roleDisplay = '👤 CREW';
+          roleClass = 'role-citizen';
+        }
+      }
+      
+      roleLabel.textContent = roleDisplay;
+      roleLabel.className = `role-label ${roleClass}`;
+      progressText.textContent = `Player ${index + 1} of ${total}`;
+
+      if (isLast) {
+        nextBtn.textContent = '✅ Done';
+        nextBtn.className = 'done-btn';
+        nextBtn.onclick = function() {
+          revealFullscreen.classList.remove('active');
+          closeAllOverlays();
+        };
+      } else {
+        nextBtn.textContent = 'Next →';
+        nextBtn.className = 'next-btn-big';
+        nextBtn.onclick = function() {
+          currentPlayerIndex++;
+          showPlayerFullscreen(currentPlayerIndex);
+        };
+      }
+
+      revealFullscreen.classList.add('active');
+    }
+
+    // ----- SONGS GAME (CLASSICS ONLY) -----
+    function openSongsOverlay() {
+      songsOverlay.classList.add('active');
+      revealFullscreen.classList.remove('active');
+      gameData = null;
+      currentPlayerIndex = 0;
+    }
+
+    launchSongsBtn.addEventListener('click', openSongsOverlay);
+    closeSongsOverlayBtn.addEventListener('click', closeAllOverlays);
+    songsOverlay.addEventListener('click', function(e) {
+      if (e.target === songsOverlay) closeAllOverlays();
+    });
+
+    startSongsBtn.addEventListener('click', function() {
+      const totalPlayers = parseInt(songsPlayerCount.value, 10) || 4;
+      
+      if (totalPlayers < 2) { alert('Minimum 2 players required for Songs & Beats.'); return; }
+      if (totalPlayers > 12) { alert('Maximum 12 players.'); return; }
+
+      const images = SONG_LINKS.classic;
+
+      // Build player data - each gets a unique classic song
+      const players = [];
+      for (let i = 0; i < totalPlayers; i++) {
+        const idx = i % images.length;
+        players.push({
+          id: i,
+          role: 'song',
+          songTitle: `Classic #${i + 1}`,
+          image: images[idx]
+        });
+      }
+
+      gameData = {
+        totalPlayers,
+        players: players,
+        gameType: 'songs'
+      };
+
+      currentPlayerIndex = 0;
+      songsOverlay.classList.remove('active');
+      showPlayerFullscreen(currentPlayerIndex);
+    });
+
+    // ----- MAFIA GAME (unchanged) -----
+    function openMafiaOverlay() {
+      mafiaOverlay.classList.add('active');
+      revealFullscreen.classList.remove('active');
+      gameData = null;
+      currentPlayerIndex = 0;
+    }
+
+    launchMafiaBtn.addEventListener('click', openMafiaOverlay);
+    closeMafiaOverlayBtn.addEventListener('click', closeAllOverlays);
+    mafiaOverlay.addEventListener('click', function(e) {
+      if (e.target === mafiaOverlay) closeAllOverlays();
+    });
+
+    startMafiaBtn.addEventListener('click', function() {
+      const totalPlayers = parseInt(mafiaPlayerCount.value, 10) || 6;
+      
+      if (totalPlayers < 4) { alert('Minimum 4 players required for Mafia.'); return; }
+      if (totalPlayers > 12) { alert('Maximum 12 players.'); return; }
+
+      const officerImg = MAFIA_LINKS.officer;
+      const doctorImg = MAFIA_LINKS.doctor;
+      const mafiaImg = MAFIA_LINKS.mafia;
+      const citizenImg = MAFIA_LINKS.citizen;
+
+      const shuffledIndices = Array.from({ length: totalPlayers }, (_, i) => i).sort(() => Math.random() - 0.5);
+      
+      const officerIndex = shuffledIndices[0];
+      const doctorIndex = shuffledIndices[1];
+      const mafiaIndex = shuffledIndices[2];
+      
+      const players = [];
+      for (let i = 0; i < totalPlayers; i++) {
+        let role = 'citizen';
+        let image = citizenImg;
+        
+        if (i === officerIndex) {
+          role = 'officer';
+          image = officerImg;
+        } else if (i === doctorIndex) {
+          role = 'doctor';
+          image = doctorImg;
+        } else if (i === mafiaIndex) {
+          role = 'mafia';
+          image = mafiaImg;
+        }
+        
+        players.push({
+          id: i,
+          role: role,
+          image: image
+        });
+      }
+
+      gameData = {
+        totalPlayers,
+        players: players,
+        gameType: 'mafia'
+      };
+
+      currentPlayerIndex = 0;
+      mafiaOverlay.classList.remove('active');
+      showPlayerFullscreen(currentPlayerIndex);
+    });
+
+    // ----- IMPOSTER GAME (unchanged) -----
+    function openImposterOverlay() {
+      imposterOverlay.classList.add('active');
+      revealFullscreen.classList.remove('active');
+      gameData = null;
+      currentPlayerIndex = 0;
+    }
+
+    launchImposterBtn.addEventListener('click', openImposterOverlay);
+    closeImposterOverlayBtn.addEventListener('click', closeAllOverlays);
+    imposterOverlay.addEventListener('click', function(e) {
+      if (e.target === imposterOverlay) closeAllOverlays();
+    });
+
+    startImposterBtn.addEventListener('click', function() {
+      const totalPlayers = parseInt(playerCountInput.value, 10) || 6;
+      let imposters = parseInt(imposterCountInput.value, 10) || 1;
+      const category = categorySelect.value;
+
+      if (totalPlayers < 3) { alert('Minimum 3 players.'); return; }
+      if (totalPlayers > 12) { alert('Maximum 12 players.'); return; }
+      if (imposters < 1) imposters = 1;
+      if (imposters >= totalPlayers) imposters = totalPlayers - 1;
+      if (imposters > 3) imposters = 3;
+
+      const categoryImages = IMPOSTER_LINKS[category] || IMPOSTER_LINKS.random;
+      const randomIndex = Math.floor(Math.random() * categoryImages.length);
+      const crewImage = categoryImages[randomIndex];
+      const imposterImage = IMPOSTER_LINKS.imposter;
+
+      const indices = Array.from({ length: totalPlayers }, (_, i) => i);
+      const shuffledIndices = indices.sort(() => Math.random() - 0.5);
+      const imposterIndices = shuffledIndices.slice(0, imposters);
+
+      const players = Array.from({ length: totalPlayers }, (_, i) => ({
+        id: i,
+        role: imposterIndices.includes(i) ? 'imposter' : 'crew',
+        image: imposterIndices.includes(i) ? imposterImage : crewImage
+      }));
+
+      gameData = {
+        totalPlayers,
+        players: players,
+        gameType: 'imposter'
+      };
+
+      currentPlayerIndex = 0;
+      imposterOverlay.classList.remove('active');
+      showPlayerFullscreen(currentPlayerIndex);
+    });
+
+    // ----- Keyboard navigation -----
+    document.addEventListener('keydown', function(e) {
+      if (!revealFullscreen.classList.contains('active')) return;
+      if (!gameData) return;
+      
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        if (currentPlayerIndex < gameData.totalPlayers - 1) {
+          currentPlayerIndex++;
+          showPlayerFullscreen(currentPlayerIndex);
+        } else {
+          revealFullscreen.classList.remove('active');
+          closeAllOverlays();
+        }
+      } else if (e.key === 'Escape') {
+        revealFullscreen.classList.remove('active');
+        closeAllOverlays();
+      }
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && revealFullscreen.classList.contains('active')) {
+        revealFullscreen.classList.remove('active');
+        closeAllOverlays();
+      }
+    });
+
+  })();
+</script>
+</body>
+</html>
